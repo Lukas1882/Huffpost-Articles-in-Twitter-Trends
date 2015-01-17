@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+
+
+
+
+    <meta name="robots" content="noindex, nofollow" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" href="CSS/bootstrap-3.2.0.min.css" type="text/css">
+
+
+
+    <script type="text/javascript" src="JS/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="JS/bootstrap-3.2.0.min.js"></script>
+    <script type="text/javascript" src="JS/prettify.js"></script>
+
+    <link rel="stylesheet" href="CSS/bootstrap-multiselect.css" type="text/css">
+    <script type="text/javascript" src="JS/bootstrap-multiselect.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        window.prettyPrint() && prettyPrint();
+    });
+    </script>
+
+
+
+
+
+    <script type="text/javascript" src="JS/script.js"></script>
+
+    <title>Huffington on Twitter </title>
+</head>
+
+<body onload="onload_functions()">
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Huffington On Twitter</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+
+                    <li><a href="#">Details</a>
+                    </li>
+                    <li><a href="#">About Me</a>
+                    </li>
+
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Github</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <div class="container">
+        <div class="row">
+            <h1>Huffpost Articles on Twitter Trending</h1>
+        </div>
+        <br>
+        <div class="row container">
+            <div class='row'>
+                <div class='col-md-4' id='top_list'>
+                    <div class='alert alert-info'>
+
+                        <h3>Top 10 New York Trends:</h3>
+                        <label>1.Show the top trends in NYC with the links to certain Twitter topic.</label>
+                        <div class="list-group">
+                            <a href="#" class="list-group-item active">Top 10 in NYC </a>
+
+                            <div id="trend_list">
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <iframe src="jump.html" width="100%"  class="n "frameborder="yes"height=600px></iframe>
+                </div>
+            </div>
+            <div class='alert alert-warning'>
+                <label>2.Update the topics in MongoDB. Limited times can be done in each hour, due to the policy of Twitter API.</label>
+                <br>
+                <button class="btn btn-success" onclick="update_dbTrends()">Update The Newest </button>
+            </div>
+            <br>
+
+            <div class='alert alert-danger'>
+                <label>3.Get links from Huffington Post with Selenium and save them into Mongodb. Then scan each link to get the article's title, section and tags.</label>
+                <br>
+
+                <div class='row'>
+
+                    <div class="col-md-3" id="section_list">
+                        <select id="section_multi" multiple="multiple">
+                            <option value="">FRONT PAGE</option>
+                            <option value="politics">POLITICS</option>
+                            <option value="business">BUSINESS</option>
+                            <option value="entertainment">ENTERTAINMENT</option>
+                            <option value="tech">TECH</option>
+                            <option value="media">MEDIA</option>
+                            <option value="theworldpost">WORLDPOST</option>
+                            <option value="healthy-living">HEALTHY LIVING</option>
+                            <option value="comedy">COMEDY</option>
+                        </select>
+                    </div>
+
+                    <button class="btn btn-info col-md-2" onclick="collect_links()">Collect Links from Huffington</button>
+                    <br>
+                </div>
+            </div>
+
+
+            <div class="alert alert-success">
+                <label>4.Run Python scripts to find the related articles from above scan.</label>
+                <br> Choose the topic :
+                <div class="row">
+                    <div class='col-md-3'>
+                        <div class="hidden" id="trends_list">
+                            <select id="topic_multi" multiple="multiple">
+                                <option value="0">Option 1</option>
+                                <option value="1">Option 1</option>
+                                <option value="2">Option 2</option>
+                                <option value="3">Option 3</option>
+                                <option value="4">Option 4</option>
+                                <option value="5">Option 5</option>
+                                <option value="6">Option 6</option>
+                                <option value="7">Option 5</option>
+                                <option value="8">Option 6</option>
+                                <option value="9">Option 6</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class=''>
+                    <button class="btn btn-primary col-md-2" onclick="collect_links()">Search with Selected Topics</button>
+                    </div>
+                </div>
+
+            </div>
+
+
+</body>
+
+</html>
+
+
+
+<script>
+function onload_functions() {
+
+    load_trends();
+}
+$(document).ready(function() {
+    $('#section_multi').multiselect({
+        buttonText: function(options, select) {
+            if (options.length === 0) {
+                return 'No option selected ... <b class="caret"></b>';
+            } else if (options.length > 10) {
+                return 'More than 10 options selected! <b class="caret"></b>';
+            } else {
+                var labels = [];
+                options.each(function() {
+                    if ($(this).attr('label') !== undefined) {
+                        labels.push($(this).attr('label'));
+                    } else {
+                        labels.push($(this).html());
+                    }
+                });
+                return labels.join(', ') + ' <b class="caret"></b>';
+            }
+        }
+    });
+
+});
+
+function showtrends() {
+    $(document).ready(function() {
+
+        $('#topic_multi').multiselect({
+            buttonText: function(options, select) {
+                if (options.length === 0) {
+                    return 'No option selected ... <b class="caret"></b>';
+                } else if (options.length > 10) {
+                    return 'More than 10 options selected! <b class="caret"></b>';
+                } else {
+                    var labels = [];
+                    options.each(function() {
+                        if ($(this).attr('label') !== undefined) {
+                            labels.push($(this).attr('label'));
+                        } else {
+                            labels.push($(this).html());
+                        }
+                    });
+                    return labels.join(', ') + ' <b class="caret"></b>';
+                }
+            }
+        });
+        document.getElementById("trends_list").className = "";
+    });
+
+}
+</script>
