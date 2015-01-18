@@ -9,7 +9,7 @@ from connect_database import getDatabase
 
 # save the links to database.
 def update_to_db(browser,page):
-    db = getDatabase()
+    db = getDatabase().lyl
    
     # get all the links in page
     links = browser.find_elements_by_xpath('//a')

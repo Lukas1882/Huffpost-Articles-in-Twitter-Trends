@@ -71,9 +71,33 @@ function collect_links() {
         datatype:"json",
         data: {'data':section_str},
         success: function(response) {
-           alert(response.message);
-                            
+           alert(response.message);                   
         }
     });
+}
 
+function get_articles() {
+    // put section values into json format
+    section_str = '[';
+    for (var i = 0; i < $("#trends_list :selected").length; i++) {
+        section_str += '"' + $("#trends_list :selected")[i].innerHTML + '",';
+    }
+    section_str = section_str.slice(0, [section_str.length - 1]) + ']'
+    // check if selected one section
+    if (section_str == "]"){
+      alert("Choose one section please.");
+       return false;
+    }
+
+  
+  // alert(section_str);
+    $.ajax({
+        type: "POST",
+        url: "../Python/get_articles_entry.py",
+        datatype:"json",
+        data: {'data':section_str},
+        success: function(response) {
+           alert(response.message);                   
+        }
+    });
 }

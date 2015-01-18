@@ -17,8 +17,8 @@ def update_to_db(trends_data):
         client = MongoClient()
         client = MongoClient('localhost', 27017)
         db = client.lyl
-        db.trends.drop()
-        db.trends.insert(trends_data)
+        db.trends1.drop()   # need to change back to trends!!!!!
+        db.trends1.insert(trends_data)
 
     except Exception,e:
         print "LYL:Pymongo connection error:\n",str(e)

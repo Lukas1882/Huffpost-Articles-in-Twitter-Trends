@@ -57,7 +57,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
 
-                    <li><a href="#">Details</a>
+                    <li><a href="/Details">Details</a>
                     </li>
                     <li><a href="#">About Me</a>
                     </li>
@@ -96,7 +96,7 @@
                     </div>
                 </div>
                 <div class="col-md-8">
-                    <iframe src="jump.html" width="100%"  class="n "frameborder="yes"height=600px></iframe>
+                    <!--    <iframe src="jump.html" width="100%"  class="n "frameborder="yes"height=600px></iframe> -->
                 </div>
             </div>
             <div class='alert alert-warning'>
@@ -125,10 +125,12 @@
                             <option value="comedy">COMEDY</option>
                         </select>
                     </div>
-
-                    <button class="btn btn-info col-md-2" onclick="collect_links()">Collect Links from Huffington</button>
-                    <br>
                 </div>
+                <br>
+                <button class="btn btn-info col-md-2" onclick="collect_links()">Collect Links from Huffington</button>
+                <br>
+                <br>
+
             </div>
 
 
@@ -152,15 +154,26 @@
                             </select>
                         </div>
                     </div>
-                    <div class=''>
-                    <button class="btn btn-primary col-md-2" onclick="collect_links()">Search with Selected Topics</button>
-                    </div>
-                </div>
 
+                </div>
+                <br>
+                <button class="btn btn-primary col-md-2" onclick="get_articles()">Search with Selected Topics</button>
+                <br>
+                <br>
             </div>
 
 
 </body>
+
+
+
+
+ <form action="Python/postdata.py" method="get">
+  First name: <input type="text" name="username"><br>
+ 
+  <input type="submit" value="Submit">
+</form> 
+
 
 </html>
 
