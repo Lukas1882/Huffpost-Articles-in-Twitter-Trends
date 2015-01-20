@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+# This is entry file to collect data from section pages. However, due to permission issues, it cannot call from remote client side.
 import sys
 import json
 import cgi
@@ -15,7 +15,8 @@ data = {}
 for k in fs.keys():
     data[k] = fs.getvalue(k)
 
-result['message'] = "Server: Have get the data:"+data["data"]+'. However, after trying webdriver with Friefox, headless Firefox, xvfbwrapper and PhantomJS, the webdriver cannot run with the necessary permissions. It should be caused by system setting issues. You can collect the link or scan the url manually runing Python scripts. You can find more information from READ_ME.'
-sys.stdout.write(json.dumps(result,indent=1))
+result['message'] = "Server: Have get the data:" + data["data"] + \
+    '. However, after trying webdriver with Friefox, headless Firefox, xvfbwrapper and PhantomJS, the webdriver cannot run with the necessary permissions. It should be caused by system setting issues. You can collect the link or scan the url manually runing Python scripts. You can find more information from READ_ME.'
+sys.stdout.write(json.dumps(result, indent=1))
 sys.stdout.write("\n")
 sys.stdout.close()

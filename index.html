@@ -1,26 +1,15 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
-
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
-
-
-
-
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
     <meta name="robots" content="noindex, nofollow" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-
     <link rel="stylesheet" href="CSS/bootstrap-3.2.0.min.css" type="text/css">
-
-
-
     <script type="text/javascript" src="JS/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="JS/bootstrap-3.2.0.min.js"></script>
     <script type="text/javascript" src="JS/prettify.js"></script>
-
     <link rel="stylesheet" href="CSS/bootstrap-multiselect.css" type="text/css">
     <script type="text/javascript" src="JS/bootstrap-multiselect.js"></script>
     <script type="text/javascript">
@@ -28,18 +17,10 @@
         window.prettyPrint() && prettyPrint();
     });
     </script>
-
-
-
-
-
     <script type="text/javascript" src="JS/script.js"></script>
-
     <title>Huffington on Twitter </title>
 </head>
-
 <body onload="onload_functions()">
-
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -52,7 +33,6 @@
                 </button>
                 <a class="navbar-brand" href="#">Huffington On Twitter</a>
             </div>
-
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
@@ -61,9 +41,7 @@
                     </li>
                     <li><a href="#">About Me</a>
                     </li>
-
                 </ul>
-
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#">Github</a>
                     </li>
@@ -87,101 +65,115 @@
                         <label>1.Show the top trends in NYC with the links to certain Twitter topic.</label>
                         <div class="list-group">
                             <a href="#" class="list-group-item active">Top 10 in NYC </a>
-
                             <div id="trend_list">
-
                             </div>
-
                         </div>
                     </div>
                 </div>
                 <div class="col-md-8">
-                    <!--    <iframe src="jump.html" width="100%"  class="n "frameborder="yes"height=600px></iframe> -->
-                </div>
-            </div>
-            <div class='alert alert-warning'>
-                <label>2.Update the topics in MongoDB. Limited times can be done in each hour, due to the policy of Twitter API.</label>
-                <br>
-                <button class="btn btn-success" onclick="update_dbTrends()">Update The Newest </button>
-            </div>
-            <br>
-
-            <div class='alert alert-danger'>
-                <label>3.Get links from Huffington Post with Selenium and save them into Mongodb. Then scan each link to get the article's title, section and tags.</label>
-                <br>
-
-                <div class='row'>
-
-                    <div class="col-md-3" id="section_list">
-                        <select id="section_multi" multiple="multiple">
-                            <option value="">FRONT PAGE</option>
-                            <option value="politics">POLITICS</option>
-                            <option value="business">BUSINESS</option>
-                            <option value="entertainment">ENTERTAINMENT</option>
-                            <option value="tech">TECH</option>
-                            <option value="media">MEDIA</option>
-                            <option value="theworldpost">WORLDPOST</option>
-                            <option value="healthy-living">HEALTHY LIVING</option>
-                            <option value="comedy">COMEDY</option>
-                        </select>
+                    <div class='alert alert-warning'>
+                        <label>2.Update the topics in MongoDB. Limited times can be done in each hour, due to the policy of Twitter API.</label>
+                        <br>
+                        <button class="btn btn-success" onclick="update_dbTrends()">Update The Newest </button>
+                        <br>
+                        <br>
+                        <font color=red> WARNING!</font>
+                        <br>
+                        <font color=blue>Be careful with this button, if clicked, the topics will update to the newest onees. Since the information of the articles are saved in database, if you search the new topics in the old articles, it is possible getting no related result.</font>
+                        <br>
                     </div>
-                </div>
-                <br>
-                <button class="btn btn-info col-md-2" onclick="collect_links()">Collect Links from Huffington</button>
-                <br>
-                <br>
 
-            </div>
-
-
-            <div class="alert alert-success">
-                <label>4.Run Python scripts to find the related articles from above scan.</label>
-                <br> Choose the topic :
-                <div class="row">
-                    <div class='col-md-3'>
-                        <div class="hidden" id="trends_list">
-                            <select id="topic_multi" multiple="multiple">
-                                <option value="0">Option 1</option>
-                                <option value="1">Option 1</option>
-                                <option value="2">Option 2</option>
-                                <option value="3">Option 3</option>
-                                <option value="4">Option 4</option>
-                                <option value="5">Option 5</option>
-                                <option value="6">Option 6</option>
-                                <option value="7">Option 5</option>
-                                <option value="8">Option 6</option>
-                                <option value="9">Option 6</option>
-                            </select>
+                    <div class='alert alert-danger'>
+                        <label>3.Get links from Huffington Post with Selenium and save them into Mongodb. Then scan each link to get the article's title, section and tags.</label>
+                        <br>
+                        <div class='row'>
+                            <div class="col-md-12" id="section_list">
+                                <select id="section_multi" multiple="multiple">
+                                    <option value="">FRONT PAGE</option>
+                                    <option value="politics">POLITICS</option>
+                                    <option value="business">BUSINESS</option>
+                                    <option value="entertainment">ENTERTAINMENT</option>
+                                    <option value="tech">TECH</option>
+                                    <option value="media">MEDIA</option>
+                                    <option value="theworldpost">WORLDPOST</option>
+                                    <option value="healthy-living">HEALTHY LIVING</option>
+                                    <option value="comedy">COMEDY</option>
+                                </select>
+                            </div>
+                            <br>
+                            <br>
                         </div>
+                        <br>
+                        <button class="btn btn-info col-md-4" onclick="collect_links()">Collect Links from Huffington</button>
+                        <br>
+                        <br>
+                        <br>
                     </div>
-
+                    <div class="alert alert-success">
+                        <label>4.Run Python scripts to find the related articles from above scan.</label>
+                        <br> Choose the topic :
+                        <div class="row">
+                            <div class='col-md-3'>
+                                <div class="hidden" id="trends_list">
+                                    <select id="topic_multi" multiple="multiple">
+                                        <option value="0">Option 1</option>
+                                        <option value="1">Option 1</option>
+                                        <option value="2">Option 2</option>
+                                        <option value="3">Option 3</option>
+                                        <option value="4">Option 4</option>
+                                        <option value="5">Option 5</option>
+                                        <option value="6">Option 6</option>
+                                        <option value="7">Option 5</option>
+                                        <option value="8">Option 6</option>
+                                        <option value="9">Option 6</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <button class="btn btn-primary col-md-4" onclick="get_articles()">Search with Selected Topics</button>
+                        <br>
+                        <br>
+                        <br>
+                    </div>
                 </div>
-                <br>
-                <button class="btn btn-primary col-md-2" onclick="get_articles()">Search with Selected Topics</button>
-                <br>
-                <br>
             </div>
-
-
-</body>
-
-
-
-
- <form action="Python/postdata.py" method="get">
-  First name: <input type="text" name="username"><br>
- 
-  <input type="submit" value="Submit">
-</form> 
-
-
+            <div class="alert alert-warning">
+                <label>5.Search with your key words.</label>
+                <br>
+                <div class="row">
+                    <div class="col-md-3">
+                        <input id='keyword' class="form-control" placeholder="Search with your word">
+                    </div>
+                    <div class="col-md-offset-1 col-md-7">
+                        <button class="btn btn-success" onclick="user_search()">Search</button>
+                        Believe me, "Obama" and "American" will always get result.
+                    </div>
+                </div>
+            </div>
+            <body>
+                <div class="bs-example hidden" id="article_table">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Row</th>
+                                <th>Title</th>
+                                <th>Tags</th>
+                                <th>Section</th>
+                            </tr>
+                        </thead>
+                        <tbody id="articles">
+                        </tbody>
+                    </table>
+                </div>
+                <div class=" navbar-fixed-bottom footter">
+                    <div class="footter">
+                        Yaolong Li 2015
+                    </div>
+                </div>
 </html>
-
-
-
 <script>
 function onload_functions() {
-
     load_trends();
 }
 $(document).ready(function() {
@@ -204,12 +196,9 @@ $(document).ready(function() {
             }
         }
     });
-
 });
-
 function showtrends() {
     $(document).ready(function() {
-
         $('#topic_multi').multiselect({
             buttonText: function(options, select) {
                 if (options.length === 0) {
@@ -231,6 +220,5 @@ function showtrends() {
         });
         document.getElementById("trends_list").className = "";
     });
-
 }
 </script>

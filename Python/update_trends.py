@@ -1,3 +1,4 @@
+# This file used to update trends in database.
 import tweepy
 import pymongo
 import json
@@ -17,14 +18,14 @@ def update_to_db(trends_data):
         client = MongoClient()
         client = MongoClient('localhost', 27017)
         db = client.lyl
-        db.trends1.drop()   # need to change back to trends!!!!!
-        db.trends1.insert(trends_data)
+        db.trends.drop()   # need to change back to trends!!!!!
+        db.trends.insert(trends_data)
 
     except Exception,e:
         print "LYL:Pymongo connection error:\n",str(e)
 
 trends = get_trends_place(2459115)  
-dd =json.dumps(trends) 
+jsondata =json.dumps(trends) 
 update_to_db(trends)
 
-print dd
+print jsondata

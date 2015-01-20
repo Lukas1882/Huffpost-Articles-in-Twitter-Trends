@@ -18,7 +18,6 @@ function load_trends() {
                 }
                 //show the topics in dropdown
                 document.getElementById("topic_multi").options[i].innerHTML = json_trend[i]["name"];
-
             }
             document.getElementById("trend_list").innerHTML = trend_str;
             showtrends();
@@ -26,17 +25,11 @@ function load_trends() {
     });
 }
 
-function get_dbTrends() {
-    $.ajax({
-        type: 'GET',
-        url: "../Python/load_trends.py",
-        dataType: "text",
-        success: function(response) {}
-    });
-
-}
-
 function update_dbTrends() {
+    var r = confirm("Are you sure you need a update ?");
+    if (!r) {
+        return false;
+    }
     $.ajax({
         type: 'GET',
         url: "../Python/update_trends_entry.py",
@@ -44,7 +37,6 @@ function update_dbTrends() {
         success: function(response) {
             alert("Updated the trends in database!");
             window.location.reload()
-
         }
     });
 }
@@ -56,26 +48,25 @@ function collect_links() {
         section_str += '"' + $("#section_list :selected")[i].innerHTML + '",';
     }
     section_str = section_str.slice(0, [section_str.length - 1]) + ']'
-    // check if selected one section
-    if (section_str == "]"){
-      alert("Choose one section please.");
-       return false;
+        // check if selected one section
+    if (section_str == "]") {
+        alert("Choose one section please.");
+        return false;
     }
-
-  
-  // alert(section_str);
+    // alert(section_str);
     $.ajax({
         type: "POST",
-         
+
         url: "../Python/collect_data_entry.py",
-        datatype:"json",
-        data: {'data':section_str},
+        datatype: "json",
+        data: {
+            'data': section_str
+        },
         success: function(response) {
-           alert(response.message);                   
+            alert(response.message);
         }
     });
 }
-
 function get_articles() {
     // put section values into json format
     section_str = '[';
@@ -83,21 +74,53 @@ function get_articles() {
         section_str += '"' + $("#trends_list :selected")[i].innerHTML + '",';
     }
     section_str = section_str.slice(0, [section_str.length - 1]) + ']'
-    // check if selected one section
-    if (section_str == "]"){
-      alert("Choose one section please.");
-       return false;
+        // check if selected one section
+    if (section_str == "]") {
+        alert("Choose one section please.");
+        return false;
     }
-
-  
-  // alert(section_str);
     $.ajax({
         type: "POST",
         url: "../Python/get_articles_entry.py",
-        datatype:"json",
-        data: {'data':section_str},
+        datatype: "json",
+        data: {
+            'data': section_str
+        },
         success: function(response) {
-           alert(response.message);                   
+            var articleStr = '';
+            //alert(response.title.length);
+            for (var i = 0; i < response.title.length; i++) {
+                articleStr += '<tr><td>' + (i + 1) + '</td><td ><a href="' + response.url[i] + '">' + response.title[i] + '</a></td><td>' + response.tags[i] + '</td><td>' + response.section[i] + '</td></tr>';
+            }
+            location.href = "#article_table";
+            document.getElementById('articles').innerHTML = articleStr;
+            document.getElementById('article_table').className = "bs-example";
+        }
+    });
+}
+// search articles by user's key words
+function user_search() {
+    var key = document.getElementById("keyword").value;
+    if (key.length < 3) {
+        alert("Please put into a word more than 3 characters.")
+        return false;
+    }
+    $.ajax({
+        type: "POST",
+        url: "../Python/user_articles_entry.py",
+        datatype: "json",
+        data: {
+            'data': '["' + key + '"]'
+        },
+        success: function(response) {
+            var articleStr = '';
+            //alert(response.title.length);
+            for (var i = 0; i < response.title.length; i++) {
+                articleStr += '<tr><td>' + (i + 1) + '</td><td ><a href="' + response.url[i] + '">' + response.title[i] + '</a></td><td>' + response.tags[i] + '</td><td>' + response.section[i] + '</td></tr>';
+            }
+            location.href = "#article_table";
+            document.getElementById('articles').innerHTML = articleStr;
+            document.getElementById('article_table').className = "bs-example";
         }
     });
 }

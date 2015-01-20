@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 # enable debugging
+# This is entry file to load trends.
+
+
 import cgitb
 cgitb.enable()
 

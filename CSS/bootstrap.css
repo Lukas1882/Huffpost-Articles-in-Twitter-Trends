@@ -6560,3 +6560,9 @@ a.list-group-item-danger.active:focus {
 .popover {
   color: #2c3e50;
 }
+ 
+
+.footter { 
+  background-color: #b0c4de;
+  height: 50px;
+} 

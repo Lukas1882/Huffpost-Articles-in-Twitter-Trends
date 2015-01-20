@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 # enable debugging
+# Entry file for update trends.
 import cgitb
 cgitb.enable()
 
