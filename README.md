@@ -44,7 +44,7 @@ Anyway, a normal Firefox is better for debug. Developers can watch the browser t
 
 ***Tip 1***  ***: If the firefox keep loading on one page, you just need to open a new tab besides the page, then the browser will reload the page in the new tab***. (I spent hours on the loading issue, it is caused by the real time network status, make sure your roommates or colleagues don't eat up the internet data.)
 
-***Tip 2*** ***: To speed of scan speed in Firefox***. You need your browser block loading JS and images. You can use some Firefox Add-ons to this job. In my project, I use QuickJava 2.0.6. You cannot install it with opening a normal firefox since Webdriver will open another sub-version in you machine. To install it, you should run Webdriver first, then get the Firefox window opened by Webdriver. Stop your running scripts, and install the Add-on in this Firefox window. To configure it, you should to the Add-ons manager. Then you can use your Webdriver again. To check whether it is installed in your browser is easy, you can find the logo in the left side of the navbar. At the very beginning, I only can scan round 100 pages without this Add-on. After the 100 pages, the browser will shut down. :(     
+***Tip 2*** ***: To speed up page scan in Firefox***. You need your browser block loading JS and images. You can use some Firefox Add-ons to this job. In my project, I use QuickJava 2.0.6. You cannot install it with opening a normal firefox since Webdriver will open another sub-version in you machine. To install it, you should run Webdriver first, then get the Firefox window opened by Webdriver. Stop your running scripts, and install the Add-on in this Firefox window. To configure it, you should to the Add-ons manager. Then you can use your Webdriver again. To check whether it is installed in your browser is easy, you can find the logo in the left side of the navbar. At the very beginning, I only can scan round 100 pages without this Add-on. After the 100 pages, the browser will shut down. :(     
 However, this Add-on fix it.
 
 ![](https://raw.githubusercontent.com/leaot/Huffpost-Articles-in-Twitter-Trends/master/IMG/addon.png)![](https://raw.githubusercontent.com/leaot/Huffpost-Articles-in-Twitter-Trends/master/IMG/addon-setting.png)
@@ -75,6 +75,9 @@ From this picture, only a few link URLs saved into database, because it is a upd
 To run this project is very simple. Go to the folder "Python", run the file "getlink.py". You can configure the subpages or change to other URL in this file. After get the URLs, run the file "getContent.py" to scan the pages by WebDriver. You can find more information in the above discuss.
 
 During these process, only new links and articles updated into database, the previous records will be kept still. Then you can go to the web page to begin your article search. The more records in database, the more results, enjoy it.
+
+#### Use Vagrant
+To use Vagrant, you need the vagrantfile in the folder "Vagrant". All environment has been set up in this Ubuntu. To run it, you need to have a Virtualbox. The box is uploaded on Atlas https://atlas.hashicorp.com/leaot/boxes/HuffpostAndTwitter. 
 
 ***Result1:***
 ![](https://raw.githubusercontent.com/leaot/Huffpost-Articles-in-Twitter-Trends/master/IMG/result2.png)
