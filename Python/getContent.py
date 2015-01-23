@@ -5,7 +5,6 @@
 # "block" means after how many page scan, connect to the database to save the article information.
 
 
-from pyvirtualdisplay import Display
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -58,8 +57,6 @@ def getDetail(link_list, begin_index):
     # after get how many links, then save them into database
     block = 10
     print "Begin scaning files, good luck!"
-    #display = Display(visible=0, size=(800, 600))
-    # display.start()
     driver = webdriver.Firefox()
     sections = []
     titles = []
@@ -103,7 +100,7 @@ def getDetail(link_list, begin_index):
                 tag = driver.find_element_by_xpath(
                     "//div[@class='meta-bottom']//div").text
             else:
-                section = driver.find_element_by_class_name('title').text
+                section = driver.find_element_by_name('category').get_attribute('content')
                 title = driver.find_element_by_tag_name('h1').text
                 tag = driver.find_element_by_xpath(
                     "//div[@class='follow bottom-tags']/span").text
@@ -121,10 +118,9 @@ def getDetail(link_list, begin_index):
 
     save_content(titles, sections, tags, links)
     driver.quit()
-    # display.stop()
 
 
 # begin with the link index
-index = 850
+index = 0
 links = connect_links()
 getDetail(links, index)

@@ -1,0 +1,9 @@
+
+Jan,23
+2:10  AM   Get the first trends saveing in Twitter.
+           Get the first link collection in HuffPost pages.
+           Get the first page-content collection in HuffPost pages.
+
+9:50  AM   Get the second link collection in HuffPost pages.
+10:00 AM   Get the second page-content collection in HuffPost pages.
+11:10 AM   Get the second trends saving in Twitter (updated).
